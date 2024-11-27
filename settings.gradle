@@ -1,0 +1,21 @@
+pluginManagement {
+    plugins {
+        id 'org.springframework.boot' version "${springBootVersion}"
+        id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
+        id 'io.spring.javaformat' version "${springJavaFormatVersion}"
+        id 'org.asciidoctor.jvm.convert' version "${asciidoctorConvertVersion}"
+
+    }
+}
+
+rootProject.name = 'noname-server'
+
+include 'core:core-api'
+include 'core:core-domain'
+include 'core:core-domain-hexa'
+include 'support:logging'
+include 'storage:redis'
+include 'storage:main-db'
+include 'core:core-domain'
+findProject(':core:core-domain')?.name = 'core-domain'
+
