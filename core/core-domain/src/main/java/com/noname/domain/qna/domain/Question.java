@@ -104,6 +104,13 @@ public class Question {
         return this.authorId.equals(userId);
     }
 
+    public void validateAddAnswer(Long userId){
+        if(isOwner(userId)){
+            throw new IllegalArgumentException("본인의 질문에 답변할 수 없습니다.");
+        }
+        this.status.validateCanAddAnswer();
+    }
+
     public void validateVotable(Long userId) {
         if (isOwner(userId)) {
             throw new IllegalArgumentException("질문 작성자는 투표할 수 없습니다.");
