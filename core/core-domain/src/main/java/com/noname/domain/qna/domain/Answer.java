@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class Answer {
+public class Answer implements Votable{
 
     private final Long id;
     private final Long questionId;
@@ -61,6 +61,7 @@ public class Answer {
         return this.authorId.equals(userId);
     }
 
+    @Override
     public void validateVotable(Long userId) {
         if (isOwner(userId)) {
             throw new IllegalArgumentException("답변자는 본인 답변에 투표할 수 없습니다.");
