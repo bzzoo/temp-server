@@ -16,7 +16,7 @@ public class AnswerWriter {
 
     public Long create(LoginUser user, Question question, AnswerContent content) {
         question.validateAddAnswer(user.id());
-        Answer answer = Answer.generate( user.id(), question.getId(), content);
+        Answer answer = Answer.generate(user.id(), question.getId(), content);
         return answerRepository.save(answer);
     }
 

@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class Answer implements Votable{
+public class Answer implements Votable {
 
     private final Long id;
     private final Long questionId;
@@ -29,6 +29,7 @@ public class Answer implements Votable{
         return Answer.builder()
                 .authorId(userId)
                 .questionId(questionId)
+                .content(content)
                 .build();
     }
 
@@ -59,6 +60,13 @@ public class Answer implements Votable{
 
     public boolean isOwner(Long userId) {
         return this.authorId.equals(userId);
+    }
+
+    public void validatePosting(Long id) {
+        if(isOwner(id)){
+            throw new IllegalArgumentException("본인의 질문에 답변 할 수 없습니다.");
+        }
+        this.status.validateCanAccept();
     }
 
     @Override

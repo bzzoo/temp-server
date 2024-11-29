@@ -46,5 +46,10 @@ public class Vote {
     public VoteType getVoteType() {
         return voteType;
     }
+
+    public Long getVoteTargetId() { return voteTarget.getId();}
+
+    public String getVoteTargetTypeValue() { return voteTarget.getTargetTypeValue();}
+
 }
 
