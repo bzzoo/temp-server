@@ -22,6 +22,7 @@ public class QuestionWriter {
     private final VoteRestrictionValidator voteRestrictionValidator;
     private final AnswerRestrictionValidator answerRestrictionValidator;
     private final QuestionRepository questionRepository;
+    private final QuestionReader questionReader;
 
     @Transactional
     public Long create(LoginUser user, QuestionTitle title, QuestionContent content, TagNames names) {
@@ -32,8 +33,9 @@ public class QuestionWriter {
     }
 
     @Transactional
-    public void edit(LoginUser user, Question question, QuestionTitle title, QuestionContent content, TagNames names) {
+    public void edit(LoginUser user, Long questionId, QuestionTitle title, QuestionContent content, TagNames names) {
         Tags tags = tagResolver.fetchOrCreate(names);
+        Question question = questionReader.getById(questionId);
         question.edit(user.id(), title, content, tags.getTagIds());
         questionRepository.save(question);
     }

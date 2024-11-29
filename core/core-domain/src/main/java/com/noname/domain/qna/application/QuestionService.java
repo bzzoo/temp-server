@@ -30,8 +30,7 @@ public class QuestionService {
     }
 
     public void edit(LoginUser user, Long questionId, QuestionTitle title, QuestionContent content, TagNames tagNames) {
-        Question question = questionReader.getById(questionId);
-        questionWriter.edit(user, question, title, content, tagNames);
+        questionWriter.edit(user, questionId, title, content, tagNames);
     }
 
     public void delete(LoginUser user, Long questionId) {
