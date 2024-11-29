@@ -1,5 +1,6 @@
 package com.noname.domain.qna.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
@@ -11,11 +12,8 @@ public class Answer {
     private AnswerContent content;
     private AnswerStatus status;
 
-    /**
-     * 상태 변경
-     */
-
-    public Answer(Long id, Long authorId, Long questionId, AnswerContent content) {
+    @Builder
+    private Answer(Long id, Long authorId, Long questionId, AnswerContent content) {
         this.id = id;
         this.questionId = questionId;
         this.content = content;
@@ -23,7 +21,19 @@ public class Answer {
         this.status = AnswerStatus.ACTIVE;
     }
 
-    public void updateContent(AnswerContent newContent) {
+    /**
+     * 상태 변경
+     */
+
+    public static Answer generate(Long userId, Long questionId, AnswerContent content) {
+        return Answer.builder()
+                .authorId(userId)
+                .questionId(questionId)
+                .build();
+    }
+
+    public void updateContent(Long userId, AnswerContent newContent) {
+        validateAuthor(userId);
         status.validateCanUpdate();
         this.content = newContent;
     }
