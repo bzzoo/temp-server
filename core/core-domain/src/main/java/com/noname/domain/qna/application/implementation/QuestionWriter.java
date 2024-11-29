@@ -2,6 +2,7 @@ package com.noname.domain.qna.application.implementation;
 
 import com.noname.domain.common.LoginUser;
 import com.noname.domain.qna.application.port.QuestionRepository;
+import com.noname.domain.qna.domain.Answer;
 import com.noname.domain.qna.domain.Question;
 import com.noname.domain.qna.domain.QuestionContent;
 import com.noname.domain.qna.domain.QuestionTitle;
@@ -37,11 +38,15 @@ public class QuestionWriter {
         questionRepository.save(question);
     }
 
-
     public void delete(LoginUser user, Question question) {
         answerRestrictionValidator.validateQuestionDelete(question);
         voteRestrictionValidator.validateQuestionUpdatable(user, question);
         question.delete(user.id());
+        questionRepository.save(question);
+    }
+
+    public void adopt(LoginUser user, Question question, Answer answer){
+        question.adoptAnswer(user.id(), answer.getId());
         questionRepository.save(question);
     }
 }
