@@ -2,6 +2,7 @@ package com.noname.maindb;
 
 import com.noname.domain.qna.application.port.AnswerRepository;
 import com.noname.domain.qna.domain.Answer;
+import com.noname.maindb.qna.AnswerEntity;
 import com.noname.maindb.qna.AnswerJpaRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
